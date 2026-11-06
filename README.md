@@ -37,7 +37,7 @@ Other operating systems, compilers, and build generators have **not been tested*
 
 ## Installation
 
-Clone the repository:
+Clone the repository if you want a local version:
 
 ```bash
 git clone https://github.com/MPALONDON/goose-raylib.git
@@ -61,7 +61,7 @@ Projects/
 
 ## Usage
 
-Import the package using a relative path:
+Import the package
 
 ```goose
 import raylib from "MPALONDON/goose-raylib@v1";
