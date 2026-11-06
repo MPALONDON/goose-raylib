@@ -1,8 +1,21 @@
 import .types;
 
 // WINDOW
+//
+extern fn gr_init_window(
+    width:  i32,
+    height: i32,
+    title:  const u8&,
+);
 
-extern fn init_window(width: i32, height: i32, title: const u8&) = "InitWindow";
+fn init_window(
+    width:  i32,
+    height: i32,
+    title:  const u8[:],
+) {
+    let c_title = str(title, "\0");
+    gr_init_window(width, height, c_title[0]);
+}
 extern fn close_window() = "CloseWindow";
 extern fn window_should_close() -> bool = "WindowShouldClose";
 extern fn is_window_ready() -> bool = "IsWindowReady";
