@@ -30,7 +30,15 @@ extern fn image_copy(image: Image) -> Image = "ImageCopy";
 extern fn image_from_image(image: Image, rec: Rectangle) -> Image = "ImageFromImage";
 extern fn image_from_channel(image: Image, selected_channel: i32) -> Image = "ImageFromChannel";
 extern fn image_text(text: const u8&, font_size: i32, color: Color) -> Image = "ImageText";
+fn image_text(text: const u8[:], font_size: i32, color: Color) -> Image {
+    let text = str(text, "\0");
+    return image_text(text[0], font_size, color);
+}
 extern fn image_text_ex(font: Font, text: const u8&, font_size: f32, spacing: f32, tint: Color) -> Image = "ImageTextEx";
+fn image_text_ex(font: Font, text: const u8[:], font_size: f32, spacing: f32, tint: Color) -> Image {
+    let text = str(text, "\0");
+    return image_text_ex(font, text[0], font_size, spacing, tint);
+}
 extern fn image_format(image: Image&, new_format: i32) = "ImageFormat";
 extern fn image_to_pot(image: Image&, fill: Color) = "ImageToPOT";
 extern fn image_crop(image: Image&, crop: Rectangle) = "ImageCrop";
@@ -98,6 +106,10 @@ extern fn image_draw_text_pro(dst: Image&, font: Font, text: const u8&, position
 
 // TEXTURE LOADING
 extern fn load_texture(file_name: const u8&) -> Texture2D = "LoadTexture";
+fn load_texture(file_name: const u8[:]) {
+    let file_name = str(file_name, "\0");
+    return load_texture(file_name[0]);
+}
 extern fn load_texture_from_image(image: Image) -> Texture2D = "LoadTextureFromImage";
 extern fn load_texture_cubemap(image: Image, layout: i32) -> Texture2D = "LoadTextureCubemap";
 extern fn load_render_texture(width: i32, height: i32) -> RenderTexture2D = "LoadRenderTexture";

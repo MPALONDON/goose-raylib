@@ -24,6 +24,10 @@ extern fn draw_grid(slices: i32, spacing: f32) = "DrawGrid";
 
 // MODELS
 extern fn load_model(file_name: const u8&) -> Model = "LoadModel";
+fn load_model(file_name: const u8[:]) -> Model {
+    let file_name = str(file_name, "\0");
+    return load_model(file_name[0]);
+}
 extern fn load_model_from_mesh(mesh: Mesh) -> Model = "LoadModelFromMesh";
 extern fn is_model_valid(model: Model) -> bool = "IsModelValid";
 extern fn unload_model(model: Model) = "UnloadModel";
